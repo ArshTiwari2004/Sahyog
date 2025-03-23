@@ -4,14 +4,6 @@
   <img src="https://via.placeholder.com/800x400.png?text=Sahyog+Project+Logo" alt="Sahyog Logo" width="800"/>
 </p>
 
-<p align="center">
-  <a href="https://sahyog-project.vercel.app/" target="_blank">🌐 Live Project</a> |
-  <a href="#installation">🚀 Installation</a> |
-  <a href="#folder-structure">📁 Folder Structure</a> |
-  <a href="#technologies">🛠️ Technologies</a> |
-  <a href="#features">✨ Features</a> |
-  <a href="#contributing">🤝 Contributing</a>
-</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Deployed-brightgreen" alt="Status">
