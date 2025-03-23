@@ -1,15 +1,29 @@
 # Sahyog: Centralized Disaster Response and Inventory Management System 🌍
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x400.png?text=Sahyog+Project+Logo" alt="Sahyog Logo" width="800"/>
+  <a href="https://sahyog-project.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Now-0066FF?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Now">
+  </a>
 </p>
-
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Deployed-brightgreen" alt="Status">
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License">
   <img src="https://img.shields.io/badge/Team-CodeCanvas-orange" alt="Team">
 </p>
+
+
+<div align="center">
+
+[![GitHub Issues](https://img.shields.io/github/issues/ArshTiwari2004/Recap)](https://github.com/ArshTiwari2004/Sahyog/issues)
+[![GitHub Forks](https://img.shields.io/github/forks/ArshTiwari2004/Recap)](https://github.com/ArshTiwari2004/Sahyog/network)
+[![GitHub Stars](https://img.shields.io/github/stars/ArshTiwari2004/Recap)](https://github.com/ArshTiwari2004/Sahyog/stargazers)
+[![Contributors](https://img.shields.io/github/contributors/ArshTiwari2004/Recap)](https://github.com/ArshTiwari2004/Sahyog/graphs/contributors)
+[![License](https://img.shields.io/github/license/ArshTiwari2004/Sahyog)](LICENSE)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ArshTiwari2004/Sahyog)
+![GitHub last commit](https://img.shields.io/github/last-commit/ArshTiwari2004/Sahyog)
+
+</div>
 
 ---
 
