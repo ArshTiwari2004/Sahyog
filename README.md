@@ -47,39 +47,60 @@ In large-scale disasters like floods, earthquakes, and cyclones, these inefficie
 
 ---
 
-## 🛠️ Technologies
+## 🛠️ Tech Stack
 
-### AI and ML:
-- **Vertex AI** for model training and deployment.
-- **LSTMs, CNNs, GANs** for disaster prediction.
-- **Gemini API** for image, video, and text analysis.
+### AI and Machine Learning
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Vertex AI**         | Training and deploying AI models (LSTMs, CNNs, GANs) for disaster prediction.|
+| **Gemini APIs**       | Multimodal analysis of images, videos, and text for damage assessment.      |
+| **OpenCV**            | Image processing and damage detection from satellite and drone imagery.     |
 
-### Backend:
-- **Node.js** with **Express** for APIs.
-- **FastAPI** for AI model interaction.
+### Backend
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Node.js + Express** | Building RESTful APIs for the backend.                                      |
+| **FastAPI**           | Serving AI models and handling AI-related requests.                         |
+| **Apache Kafka**      | Real-time data streaming from satellites, sensors, and drones.             |
+| **Apache Spark**      | Large-scale data processing and post-disaster analysis.                     |
 
-### Frontend:
-- **React.js** for web applications.
-- **Flutter** for mobile applications.
+### Frontend
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **React.js**          | Building the web dashboard for real-time monitoring and visualization.      |
+| **Flutter**           | Developing the mobile app for citizen reporting and alerts.                 |
 
-### Database:
-- **PostgreSQL** for structured data.
-- **MongoDB** for unstructured data.
+### Database
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **PostgreSQL**        | Storing structured data like incident reports and resource details.         |
+| **MongoDB**           | Storing unstructured data like images, videos, and sensor logs.             |
 
-### Resource Management:
-- **RFID Sensors** and **Hyperledger Fabric** for real-time tracking.
+### Resource Management
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **RFID Sensors**      | Real-time tracking of relief resources like medical kits and food supplies. |
+| **Hyperledger Fabric**| Blockchain-based transparent logging of resource distribution.              |
 
-### Communication:
-- **Twilio** for SMS and calls.
-- **Firebase Cloud Messaging** for push notifications.
+### Communication
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Twilio**            | Sending SMS and voice alerts to citizens and authorities.                   |
+| **Firebase Cloud Messaging** | Push notifications for real-time updates.                              |
 
-### Visualization:
-- **Google Maps API** for GIS-based dashboards.
-- **Google Data Studio** for reports.
+### Visualization
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Google Maps API**   | GIS-based visualizations for disaster-affected areas and resource allocation.|
+| **Google Data Studio**| Generating real-time reports and insights for stakeholders.                 |
 
-### Data Processing:
-- **Apache Kafka** for data streaming.
-- **Apache Spark** for large-scale data analysis.
+### Infrastructure
+| **Technology**       | **Purpose**                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Google Cloud Storage (GCS)** | Storing satellite images, sensor data, and AI models.                  |
+| **Docker**            | Containerization of backend and AI services.                               |
+| **Kubernetes**        | Orchestrating containerized applications for scalability.                  |
+| **Terraform**         | Infrastructure as Code (IaC) for managing cloud resources.                 |
 
 ---
 
@@ -93,13 +114,6 @@ In large-scale disasters like floods, earthquakes, and cyclones, these inefficie
 6. **Resource Management**: Resources are tracked using **RFID sensors**, and **Hyperledger Fabric** ensures transparent distribution.
 7. **Task Allocation**: AI optimizes task assignments using **Dijkstra’s Algorithm** and real-time data from **Google Maps API**.
 8. **Post-Disaster Analysis**: Data is aggregated using **Apache Spark**, and **Vertex AI** generates insights for future preparedness.
-
-
-
-
-
-
-
 
 
 ## 🚀 Installation
@@ -208,3 +222,8 @@ Contributions to project Sahyog are always welcome! Please follow these steps:
 4. Push to the branch (git push origin feature/YourFeatureName).
 
 5. Open a pull request.
+
+
+### 📄 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
