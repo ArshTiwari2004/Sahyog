@@ -83,6 +83,25 @@ In large-scale disasters like floods, earthquakes, and cyclones, these inefficie
 
 ---
 
+## 🔄 Workflow
+
+1. **Data Collection**: Real-time data from satellites, sensors, and drones is streamed via **Apache Kafka** and stored in **Google Cloud Storage (GCS)**.
+2. **Disaster Prediction**: **Vertex AI** trains and deploys AI models (LSTMs, CNNs, GANs) for disaster prediction using real-time data.
+3. **Incident Reporting**: Citizens report incidents via a **Flutter app**, and **Gemini APIs** analyze images, text, and voice inputs for severity assessment.
+4. **Decision Making**: AI models process predictions and reports to generate alerts using **Vertex AI** and **Gemini APIs**.
+5. **Alert Generation**: Multilingual alerts are sent via **Twilio** (SMS/calls) and **Firebase Cloud Messaging** (push notifications).
+6. **Resource Management**: Resources are tracked using **RFID sensors**, and **Hyperledger Fabric** ensures transparent distribution.
+7. **Task Allocation**: AI optimizes task assignments using **Dijkstra’s Algorithm** and real-time data from **Google Maps API**.
+8. **Post-Disaster Analysis**: Data is aggregated using **Apache Spark**, and **Vertex AI** generates insights for future preparedness.
+
+
+
+
+
+
+
+
+
 ## 🚀 Installation
 
 To set up the project locally, follow these steps:
@@ -137,3 +156,55 @@ uvicorn main:app --reload
 cd ../../frontend/web
 npm start
 ```
+
+## 📂 Project Structure
+
+```bash
+Sahyog/
+├── backend/  
+│   ├── api/               # Main API server (Node.js + Express)  
+│   ├── ai-service/        # AI model service (Python + FastAPI)  
+│   ├── data-pipeline/     # Data processing pipeline  
+│   └── blockchain/        # Hyperledger Fabric setup  
+│
+├── frontend/  
+│   ├── web/               # React.js web application  
+│   └── mobile/            # Flutter mobile application  
+│
+├── infrastructure/  
+│   ├── terraform/         # Infrastructure as Code  
+│   ├── docker/            # Docker configurations  
+│   └── kubernetes/        # Kubernetes configs  
+│
+├── docs/                  # Documentation  
+├── scripts/               # Utility scripts  
+├── .env.example           # Example environment variables  
+├── .gitignore             # Git ignore file  
+└── README.md              # Project overview  
+```
+
+
+## 📊 Diagrams
+
+### Process Flow Diagram
+<p align="center"> <img src="https://via.placeholder.com/800x400.png?text=Process+Flow+Diagram" alt="Process Flow Diagram" width="800"/> </p>
+
+### Use Case Diagram
+<p align="center"> <img src="https://via.placeholder.com/800x400.png?text=Use+Case+Diagram" alt="Use Case Diagram" width="800"/> </p>
+
+### Architeture Diagram
+<p align="center"> <img src="https://via.placeholder.com/800x400.png?text=Architecture+Diagram" alt="Architecture Diagram" width="800"/> </p>
+
+
+## 🤝 Contributing
+Contributions to project Sahyog are always welcome! Please follow these steps:
+
+1. Fork the repository.
+
+2. Create a new branch (git checkout -b feature/YourFeatureName).
+
+3. Commit your changes (git commit -m 'Add some feature').
+
+4. Push to the branch (git push origin feature/YourFeatureName).
+
+5. Open a pull request.
