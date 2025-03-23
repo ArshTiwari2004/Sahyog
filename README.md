@@ -91,3 +91,49 @@ To set up the project locally, follow these steps:
    ```bash
    git clone https://github.com/CodeCanvas/Sahyog.git
    cd Sahyog
+
+### 2. Install dependencies
+
+### For the backend
+```bash
+cd backend/api
+npm install
+```
+
+### For the AI service
+```bash
+cd ../ai-service
+pip install -r requirements.txt
+```
+
+### For the frontend
+```bash
+cd ../../frontend/web
+npm install
+```
+
+### 3. Set up environment variables
+```bash
+cp .env.example .env
+```
+Copy .env.example to .env and fill in the required values.
+
+### 4. Run the project
+
+### Start the backend server
+```bash
+cd ../../backend/api
+npm start
+```
+
+### Start the AI service
+```bash
+cd ../ai-service
+uvicorn main:app --reload
+```
+
+### Start the frontend
+```bash
+cd ../../frontend/web
+npm start
+```
