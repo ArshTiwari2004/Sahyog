@@ -1,79 +1,102 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  HomeIcon, 
-  ExclamationTriangleIcon, 
-  CubeIcon, 
-  UserGroupIcon, 
-  ChartBarIcon, 
-  CogIcon 
-} from '@heroicons/react/24/solid';
+    Home, 
+    AlertTriangle, 
+    Package, 
+    Users, 
+    BarChart, 
+    Settings,
+    Zap 
+} from "lucide-react";
 
-const Sidebar = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+const Sidebar = ({ 
+  brandName = "Sahyog", 
+  onTabChange,
+  defaultActiveTab = 'dashboard'
+}) => {
+  const [activeTab, setActiveTab] = useState(defaultActiveTab);
 
   const menuItems = [
     { 
       name: 'Dashboard', 
-      icon: HomeIcon, 
-      route: '/', 
+      icon: Home, 
+      route: '/dashboard', 
       key: 'dashboard' 
     },
     { 
       name: 'Incidents', 
-      icon: ExclamationTriangleIcon, 
+      icon: AlertTriangle, 
       route: '/incidents', 
       key: 'incidents' 
     },
     { 
       name: 'Resources', 
-      icon: CubeIcon, 
+      icon: Package, 
       route: '/resources', 
       key: 'resources' 
     },
     { 
       name: 'Response Teams', 
-      icon: UserGroupIcon, 
+      icon: Users, 
       route: '/response-teams', 
       key: 'response-teams' 
     },
     { 
       name: 'Analytics', 
-      icon: ChartBarIcon, 
+      icon: BarChart, 
       route: '/analytics', 
       key: 'analytics' 
     },
     { 
       name: 'Settings', 
-      icon: CogIcon, 
+      icon: Settings, 
       route: '/settings', 
       key: 'settings' 
     }
   ];
 
+  const handleTabChange = (key) => {
+    setActiveTab(key);
+    if (onTabChange) {
+      onTabChange(key);
+    }
+  };
+
   return (
-    <div className="bg-dark-blue-900 w-64 min-h-screen text-white p-4 shadow-lg">
-      <div className="text-2xl font-bold mb-10 text-center">
-        Disaster Response
+    <div className="w-64 bg-[#1E293B] p-6 border-r border-gray-700 min-h-screen flex flex-col">
+      {/* Brand Section */}
+      <div className="flex items-center mb-10">
+        <Zap className="w-8 h-8 text-blue-400 mr-3" />
+        <h1 className="text-2xl font-bold text-white">{brandName}</h1>
       </div>
-      <nav>
+      
+      {/* Navigation */}
+      <nav className="space-y-2 flex-grow">
         {menuItems.map((item) => (
           <Link 
             key={item.key}
             to={item.route}
             className={`
-              flex items-center p-3 mb-2 rounded-lg transition-all duration-200
+              w-full text-left p-3 rounded-lg transition-all duration-200 flex items-center
               ${activeTab === item.key 
-                ? 'bg-dark-blue-700 text-blue-300' 
-                : 'hover:bg-dark-blue-800 text-gray-300'}
+                ? 'bg-blue-600 text-white' 
+                : 'hover:bg-[#2C3E5A] text-gray-300'}
             `}
-            onClick={() => setActiveTab(item.key)}
+            onClick={() => handleTabChange(item.key)}
           >
-            <item.icon className="w-6 h-6 mr-3" />
+            <item.icon className="w-5 h-5 mr-3" />
             {item.name}
           </Link>
         ))}
       </nav>
+
+      {/* Footer or Additional Content */}
+      <div className="mt-6 pt-4 border-t border-gray-700 text-center">
+        <p className="text-xs text-gray-400">
+          © {new Date().getFullYear()} {brandName}
+        </p>
+      </div>
     </div>
   );
 };
