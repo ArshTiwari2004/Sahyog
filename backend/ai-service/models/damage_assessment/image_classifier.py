@@ -1,4 +1,3 @@
-# ai-service/models/damage_assessment/image_classifier.py
 import tensorflow as tf
 from tensorflow.keras import layers, models, applications
 from tensorflow.keras.optimizers import Adam
