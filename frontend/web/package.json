@@ -20,6 +20,7 @@
     "firebase": "^11.5.0",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
+    "lucide-react": "^0.483.0",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
