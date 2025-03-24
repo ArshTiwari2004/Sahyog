@@ -10,13 +10,17 @@ import {
   Boxes,
   Users,
   Bell,
-  BarChart,
   ChevronRight,
   Github,
   Twitter,
   Linkedin,
   Mail,
+  Star,
   Shield,
+  Satellite,
+  Waves,
+  Zap,
+  Rocket,
 } from "lucide-react"
 
 const teamMembers = [
@@ -93,11 +97,11 @@ const features = [
     title: "Multichannel Notifications",
     description: "Alerts through SMS, calls, and push notifications using Twilio and Firebase.",
   },
-  {
-    icon: <BarChart className="h-10 w-10 text-teal-400" />,
-    title: "Post-Disaster Analysis",
-    description: "AI-powered reports and actionable insights for better preparedness.",
-  },
+  //{
+   // icon: <BarChart className="h-10 w-10 text-teal-400" />,
+   // title: "Post-Disaster Analysis",
+   // description: "AI-powered reports and actionable insights for better preparedness.",
+  //},
 ]
 
 // Sparkle component for background effect
@@ -107,7 +111,7 @@ const Sparkles = () => {
       {Array.from({ length: 50 }).map((_, i) => (
         <div
           key={i}
-          className="absolute rounded-full bg-blue-500/20"
+          className="absolute rounded-full bg-white/50"
           style={{
             width: `${Math.random() * 4 + 1}px`,
             height: `${Math.random() * 4 + 1}px`,
@@ -163,73 +167,77 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white relative overflow-hidden">
       <Sparkles />
 
-      {/* Navigation */}
-      <nav className="relative z-10 container mx-auto px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <AlertTriangle className="h-8 w-8 text-blue-500 mr-2 animate-pulse" />
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">
-            Sahyog
-          </span>
-        </div>
-        <div className="hidden md:flex space-x-8">
-          <a href="#features" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
-            Features
-          </a>
-          <a href="#mission" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
-            Mission
-          </a>
-          <a href="#team" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
-            Team
-          </a>
-          <a href="#contact" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
-            Contact
-          </a>
-        </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 transform hover:translate-y-[-2px]">
-          Login
-        </button>
-      </nav>
+     {/* Updated Navigation - Add GitHub Star Link */}
+<nav className="relative z-10 container mx-auto px-6 py-4 flex justify-between items-center">
+  <div className="flex items-center">
+    <AlertTriangle className="h-8 w-8 text-blue-500 mr-2 animate-pulse" />
+    <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">
+      Sahyog
+    </span>
+  </div>
+  <div className="hidden md:flex space-x-8 items-center">
+    <a href="#features" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
+      Features
+    </a>
+    <a href="#mission" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
+      Mission
+    </a>
+    <a href="#team" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
+      Team
+    </a>
+    <a href="#how-it-works" className="hover:text-blue-400 transition-colors hover:scale-105 transform duration-200">
+      How It Works
+    </a>
+    <a 
+      href="https://github.com/ArshTiwari2004/Sahyog" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="flex items-center space-x-2 bg-transparent text-white px-3 py-1 rounded-md hover:bg-gray-700 transition-colors"
+    >
+      <Star className="h-4 w-4" />
+      <span>Star on GitHub</span>
+    </a>
+  </div>
+  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 transform hover:translate-y-[-2px]">
+    Login
+  </button>
+</nav>
 
-      {/* Hero Section - Redesigned to match reference */}
-        <section className="relative z-10 container mx-auto px-6 py-32 flex flex-col items-center justify-center min-h-screen">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {Array.from({ length: 100 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-blue-500/20"
-            style={{
-              width: `${Math.random() * 6 + 1}px`,
-              height: `${Math.random() * 6 + 1}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.5 + 0.3,
-              animation: `twinkle ${Math.random() * 8 + 5}s infinite ${Math.random() * 5}s`,
-            }}
-          />
-            ))}
-          </div>
-          
-          <AnimatedSection className="text-center max-w-4xl mx-auto">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-          <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-300">
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-600 animate-gradient">
-              Sahyog
-            </span>
-          </div>
-            </h1>
-            <div className="overflow-hidden mb-8">
-          <p className="text-gray-300 text-xl max-w-2xl mx-auto animate-slide-up animation-delay-900">
-            Sahyog bridges the gap for underprivileged communities, providing AI-powered disaster response
-            and resource optimization to help them overcome challenges. Join us in shaping the future.
-          </p>
+    {/* Updated Hero Section */}
+    <section className="relative z-10 container mx-auto px-6 py-32 flex flex-col items-center justify-center min-h-screen">
+        <AnimatedSection className="text-center max-w-4xl mx-auto">
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+            <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-300">
+              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-600 animate-gradient">
+                Sahyog
+              </span>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 mt-10 animate-fade-in-delay animation-delay-1200">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30">
-            Go to Dashboard
-          </button>
+          </h1>
+          <div className="overflow-hidden mb-8">
+            <p className="text-gray-300 text-xl max-w-2xl mx-auto animate-slide-up animation-delay-900">
+              Sahyog bridges the gap for underprivileged communities, providing AI-powered disaster response
+              and resource optimization to help them overcome challenges
+            </p>
+          </div>
+          <div className="flex flex-col items-center mt-10 animate-fade-in-delay animation-delay-1200">
+            <div className="flex flex-wrap justify-center gap-4 mb-3">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30 group relative overflow-hidden">
+                <span className="relative z-10">Dashboard Login</span>
+                <span className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+              </button>
+              <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-red-500/30 animate-pulse group relative overflow-hidden">
+                <span className="relative z-10">Emergency Report</span>
+                <span className="absolute inset-0 bg-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+              </button>
             </div>
-          </AnimatedSection>
-        </section>
+            <p className="text-gray-400 text-sm">
+              Download for Citizens
+            </p>
+          </div>
+        </AnimatedSection>
+      </section>
+    
+  
 
         {/* Mission & Vision Section */}
       <section id="mission" className="relative z-10 bg-gray-900/50 backdrop-blur-sm py-20">
@@ -324,8 +332,58 @@ function App() {
           </div>
         </div>
       </section>
+      <section id="how-it-works" className="relative z-10 py-20 bg-gray-900/50 backdrop-blur-sm">
+        <div className="container mx-auto px-6">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Sahyog in Action</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Our AI-powered platform delivers <span className="text-blue-400 font-semibold">30% faster response times</span> through advanced technological integration.
+            </p>
+            <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-teal-500 mx-auto mt-6 animate-width"></div>
+          </AnimatedSection>
 
-      {/* Team Section - Updated to remove roles and add social links */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <Satellite className="h-10 w-10 text-blue-400" />,
+                title: "Satellite Data Collection",
+                description: "Real-time global monitoring using advanced satellite imaging and sensor networks.",
+              },
+              {
+                icon: <Brain className="h-10 w-10 text-purple-400" />,
+                title: "AI Predictive Analysis",
+                description: "Machine learning algorithms process data to predict potential disaster scenarios.",
+              },
+              {
+                icon: <Zap className="h-10 w-10 text-yellow-400" />,
+                title: "Instant Alert Generation",
+                description: "Automated multi-channel alerts to authorities, responders, and affected communities.",
+              },
+              {
+                icon: <Rocket className="h-10 w-10 text-red-400" />,
+                title: "Rapid Responder Dispatch",
+                description: "AI-optimized resource allocation and fastest route calculation for emergency teams.",
+              }
+            ].map((step, index) => (
+              <AnimatedSection
+                key={index}
+                delay={index * 100}
+                className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all duration-500 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/10 group"
+              >
+                <div className="bg-gray-900/80 rounded-lg p-3 inline-block mb-4 group-hover:bg-blue-900/50 transition-colors duration-500">
+                  <div className="transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
+                    {step.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                <p className="text-gray-300">{step.description}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+       
+       {/* Team Section  */}
       <section id="team" className="relative z-10 bg-gray-900/50 backdrop-blur-sm py-20">
         <div className="container mx-auto px-6">
           <AnimatedSection className="text-center mb-16">
@@ -454,7 +512,7 @@ function App() {
                 </a>
               </div>
             </AnimatedSection>
-
+       
             <AnimatedSection delay={100}>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
