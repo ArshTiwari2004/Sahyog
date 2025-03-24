@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
     Home, 
     AlertTriangle, 
@@ -15,6 +15,7 @@ const Sidebar = ({
   onTabChange,
   defaultActiveTab = 'dashboard'
 }) => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState(defaultActiveTab);
 
   const menuItems = [
@@ -55,6 +56,15 @@ const Sidebar = ({
       key: 'settings' 
     }
   ];
+
+  // Sync active tab with current route
+  useEffect(() => {
+    const currentRoute = location.pathname;
+    const matchedItem = menuItems.find(item => item.route === currentRoute);
+    if (matchedItem) {
+      setActiveTab(matchedItem.key);
+    }
+  }, [location.pathname]);
 
   const handleTabChange = (key) => {
     setActiveTab(key);
