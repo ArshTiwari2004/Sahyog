@@ -22,7 +22,7 @@ import {
 const teamMembers = [
   {
     name: "Arsh Tiwari",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/arsh1.jpeg?height=200&width=200",
     bio: "AI/ML & Full Stack Developer",
     socials: {
       twitter: "https://twitter.com/alexjohnson",
@@ -32,8 +32,8 @@ const teamMembers = [
   },
   {
     name: "Priyanshi Bothra",
-    image: "/placeholder.svg?height=200&width=200",
-    bio: "AI/ML & Full Stack Developer",
+    image: "/priyanshi.png?height=200&width=200",
+    bio: "AI/ML & Frontend Developer",
     socials: {
       twitter: "https://twitter.com/sarahchen",
       github: "https://github.com/sarahchen",
@@ -42,7 +42,7 @@ const teamMembers = [
   },
   {
     name: "Nibedan Pati",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/nibedan1.jpeg?height=200&width=200",
     bio: "Full Stack Developer",
     socials: {
       twitter: "https://twitter.com/miguelrodriguez",
@@ -224,7 +224,7 @@ function App() {
           </p>
             </div>
             <div className="flex flex-wrap justify-center gap-4 mt-10 animate-fade-in-delay animation-delay-1200">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30">
             Go to Dashboard
           </button>
             </div>
@@ -273,7 +273,7 @@ function App() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/30 to-teal-500/30 rounded-2xl blur-lg animate-pulse"></div>
                 <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-gray-900/80">
                   <img
-                    src="/placeholder.svg?height=500&width=600"
+                    src="disaster.png?height=500&width=600"
                     alt="Disaster Response Team"
                     className="w-full h-auto rounded-2xl transform transition-all duration-1000 hover:scale-110"
                   />
@@ -504,14 +504,7 @@ function App() {
                     Documentation
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-blue-400 transition-colors duration-300 hover:translate-x-1 inline-block"
-                  >
-                    API
-                  </a>
-                </li>
+               
                 <li>
                   <a
                     href="#"
