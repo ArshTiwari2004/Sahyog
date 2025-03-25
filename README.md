@@ -177,6 +177,22 @@ cd ../../frontend/web
 npm start
 ```
 
+### Implementing docker for Sahyog
+
+#### To deploy:
+
+Build the image: 
+
+```bash
+docker build -t sahyog-ai-service 
+```
+
+Then run the command:
+
+```bash
+docker run -p 8000:8000 -e GCP_PROJECT_ID=your-project sahyog-ai-service
+```
+
 ## 📂 Project Structure
 
 ```bash
