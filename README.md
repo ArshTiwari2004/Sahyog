@@ -135,21 +135,130 @@ This AI service powers the core intelligence layer of the Sahyog disaster manage
 
 
 
+### 🛠️ Technology Stack
+
+| Component       | Technology                          | Purpose                          |
+|-----------------|-------------------------------------|----------------------------------|
+| Core Framework  | Python 3.9, FastAPI                 | API development                  |
+| AI/ML           | TensorFlow 2.12, Vertex AI          | Model training/deployment        |
+| Multimodal AI   | Gemini API                          | Text/image analysis              |
+| Cloud Services  | GCP (Storage, BigQuery, PubSub)     | Data pipeline                    |
+| Optimization    | OR-Tools                            | Resource allocation              |
+| Containerization| Docker, Gunicorn                    | Production deployment            |
 
 
+### Prerequisites
+- Google Cloud account with:
+  - Vertex AI enabled
+  - Service account with AI Platform Admin role
+- Docker installed
 
 
+### Step-by-Step Setup
+
+1. **Configure Environment Variables**
+   ```bash
+   # Required Variables
+   export GCP_PROJECT_ID="your-project-id"
+   export GCP_REGION="us-central1"
+   export GEMINI_API_KEY="your-api-key"
+   export GCS_BUCKET="your-bucket-name"
+   
+   # Optional Overrides
+   export DAMAGE_MODEL_ENDPOINT="projects/.../locations/.../endpoints/..."
+   export RESOURCE_MODEL_ENDPOINT="projects/.../locations/.../endpoints/..."
+   ```
+2.  **Build Docker Image**
+
+```bash
+docker build -t sahyog-ai-service \
+  --build-arg GCP_PROJECT_ID=$GCP_PROJECT_ID \
+  --build-arg GEMINI_API_KEY=$GEMINI_API_KEY \
+  -f ai-service/Dockerfile .
+```
+
+3.  **Run Container**
+```bash
+docker run -d \
+  -p 8000:8000 \
+  -e GCP_PROJECT_ID=$GCP_PROJECT_ID \
+  -e GEMINI_API_KEY=$GEMINI_API_KEY \
+  -e GCS_BUCKET=$GCS_BUCKET \
+  --name sahyog-ai \
+  sahyog-ai-service
+```
+
+4. Verify Deployment
+```bash
+curl http://localhost:8000/
+# Expected: {"status":"healthy","services":{"vertex":true,"gemini":true,"gcp":true}}
+```
+
+**Ensure you have these enviornment variables**
+
+| Variable                 | Required | Description                                                      |
+|---------------------------|----------|------------------------------------------------------------------|
+| GCP_PROJECT_ID            | Yes      | Your Google Cloud Platform project ID                           |
+| GEMINI_API_KEY            | Yes      | API key for Google Gemini services                              |
+| GCS_BUCKET                | Yes      | Default Google Cloud Storage bucket for disaster data           |
+| GCP_REGION                | No       | GCP region (default: us-central1)                               |
+| DAMAGE_MODEL_ENDPOINT     | No       | Vertex AI endpoint for pre-trained damage assessment model     |
+| RFID_API_ENDPOINT         | No       | URL for RFID inventory tracking system                         |
+| MAX_CONCURRENT_TASKS      | No       | Limits parallel processing (default: CPU cores * 2)            |
 
 
+**Models used with architecture**
+
+### **📊 Complete Model Inventory**
+
+#### **1. Disaster Prediction Models**
+| Model File         | Architecture       | Input Shape      | Output                          | Pretrained Weights |
+|--------------------|--------------------|------------------|---------------------------------|--------------------|
+| `lstm_model.py`    | Stacked LSTM       | (24, 5)          | Binary probability              | No                 |
+| `cnn_model.py`     | EfficientNetB4     | (256, 256, 3)    | 5-class disaster                | ImageNet           |
+| `gan_model.py`     | DCGAN              | (100,) latent dim| (256, 256, 3) synthetic images  | No                 |
+
+#### **2. Damage Assessment Models**
+| Model File            | Architecture | Input Shape      | Output                     | Key Features       |
+|-----------------------|--------------|------------------|----------------------------|--------------------|
+| `image_classifier.py` | EfficientNetB4 | (512, 512, 3)   | 4 damage levels            | Transfer learning  |
+| `object_detector.py`  | YOLOv8x      | (640, 640, 3)    | BBox + 6 classes           | COCO pretrained    |
+
+#### **3. Resource Optimization Models**
+| Model File            | Architecture       | Input Features       | Output                  | Optimization Method |
+|-----------------------|--------------------|-----------------------|-------------------------|---------------------|
+| `predictive_model.py` | Hybrid LSTM-RF     | 7 temporal features  | 5 resource demands      | Adam + Gini impurity|
+| `allocation_model.py` | OR-Tools MIP       | Demand constraints   | Allocation plan         | Linear Programming  |
 
 
+**LSTM-RF Hybrid (Resource Prediction)**
+
+Hybrid Model Architecture:
+┌─────────────────────┐   ┌─────────────────────┐
+│ Time-Series LSTM    │   │ Structured Data     │
+│ (3 layers)          │   │ Random Forest       │
+├─────────────────────┤   ├─────────────────────┤
+│ • LSTM (64 units)   │   │ • 100 decision trees│
+│ • LSTM (128 units)  │   │ • max_depth=12      │
+│ • Dense (32 units)  │   │ • min_samples=5     │
+└──────────┬──────────┘   └──────────┬──────────┘
+           │                         │
+           └───── Concatenate ───────┘
+                      │
+               Dense (5 units, softmax)
+
+**Performace comparision for the models deployed**
+
+| Endpoint                | Avg Latency | Throughput (req/s) |
+|--------------------------|-------------|---------------------|
+| Disaster Prediction      | 320ms       | 45                  |
+| Damage Assessment        | 480ms       | 32                  |
+| Resource Optimization    | 210ms       | 68                  |
+
+*Tested on: n1-standard-4 VM, 100 concurrent requests*
 
 
-
-
-
-
-
+Note: This can vary , I have taken avg latency to get this
 
 
 
