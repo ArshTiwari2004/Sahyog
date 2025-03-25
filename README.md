@@ -122,6 +122,39 @@ In large-scale disasters like floods, earthquakes, and cyclones, these inefficie
 8. **Post-Disaster Analysis**: Data is aggregated using **Apache Spark**, and **Vertex AI** generates insights for future preparedness.
 
 
+
+
+## Explaining the ai-service folder in detail 
+
+This AI service powers the core intelligence layer of the Sahyog disaster management system, providing:
+
+- **Real-time disaster prediction** using satellite/drone/sensor data
+- **Multimodal damage assessment** (images, text reports, sensor data)
+- **Optimal resource allocation** during emergencies
+- **Automated reporting & alerting**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 🚀 Installation
 
 To set up the project locally, follow these steps:
