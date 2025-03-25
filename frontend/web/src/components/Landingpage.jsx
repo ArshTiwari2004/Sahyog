@@ -205,41 +205,37 @@ function App() {
 
     {/* Updated Hero Section */}
     <section className="relative z-10 container mx-auto px-6 py-32 flex flex-col items-center justify-center min-h-screen">
-        <AnimatedSection className="text-center max-w-4xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-            <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-300">
-              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-600 animate-gradient">
-                Sahyog
-              </span>
-            </div>
-          </h1>
-          <div className="overflow-hidden mb-8">
-            <p className="text-gray-300 text-xl max-w-2xl mx-auto animate-slide-up animation-delay-900">
-              Sahyog bridges the gap for underprivileged communities, providing AI-powered disaster response
-              and resource optimization to help them overcome challenges
-            </p>
+      <AnimatedSection className="text-center max-w-4xl mx-auto">
+        <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+          <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-300">
+            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 animate-slide-up animation-delay-600 animate-gradient">
+              Sahyog
+            </span>
           </div>
-          <div className="flex flex-col items-center mt-10 animate-fade-in-delay animation-delay-1200">
-            <div className="flex flex-wrap justify-center gap-4 mb-3">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30 group relative overflow-hidden">
-                <span className="relative z-10">Dashboard Login</span>
-                <span className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-              </button>
-              <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-red-500/30 animate-pulse group relative overflow-hidden">
-                <span className="relative z-10">Emergency Report</span>
-                <span className="absolute inset-0 bg-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-              </button>
-            </div>
-            <p className="text-gray-400 text-sm">
-              Download for Citizens
-            </p>
+        </h1>
+        <div className="overflow-hidden mb-8">
+          <p className="text-gray-300 text-xl max-w-2xl mx-auto animate-slide-up animation-delay-900">
+            Sahyog bridges the gap for underprivileged communities, providing AI-powered disaster response
+            and resource optimization to help them overcome challenges
+          </p>
+        </div>
+        <div className="flex flex-col items-center mt-10 animate-fade-in-delay animation-delay-1200">
+          <div className="flex flex-wrap justify-center gap-4 mb-3">
+            <a href="/dashboard" className="bg-blue-500 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30 group relative overflow-hidden">
+              <span className="relative z-10">Dashboard Login</span>
+              <span className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+            </a>
+            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-red-500/30 animate-pulse group relative overflow-hidden">
+              <span className="relative z-10">Emergency Report</span>
+              <span className="absolute inset-0 bg-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+            </button>
           </div>
-        </AnimatedSection>
-      </section>
-    
-  
-
-        {/* Mission & Vision Section */}
+          <p className="text-gray-400 text-sm">
+            Download for Citizens
+          </p>
+        </div>
+      </AnimatedSection>
+    </section>
       <section id="mission" className="relative z-10 bg-gray-900/50 backdrop-blur-sm py-20">
         <div className="container mx-auto px-6">
           <AnimatedSection className="text-center mb-16">
