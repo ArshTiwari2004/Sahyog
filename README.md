@@ -231,21 +231,6 @@ curl http://localhost:8000/
 | `allocation_model.py` | OR-Tools MIP       | Demand constraints   | Allocation plan         | Linear Programming  |
 
 
-**LSTM-RF Hybrid (Resource Prediction)**
-
-Hybrid Model Architecture:
-┌─────────────────────┐   ┌─────────────────────┐
-│ Time-Series LSTM    │   │ Structured Data     │
-│ (3 layers)          │   │ Random Forest       │
-├─────────────────────┤   ├─────────────────────┤
-│ • LSTM (64 units)   │   │ • 100 decision trees│
-│ • LSTM (128 units)  │   │ • max_depth=12      │
-│ • Dense (32 units)  │   │ • min_samples=5     │
-└──────────┬──────────┘   └──────────┬──────────┘
-           │                         │
-           └───── Concatenate ───────┘
-                      │
-               Dense (5 units, softmax)
 
 **Performace comparision for the models deployed**
 
