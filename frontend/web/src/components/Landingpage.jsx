@@ -30,8 +30,8 @@ const teamMembers = [
     bio: "AI/ML & Full Stack Developer",
     socials: {
       twitter: "https://twitter.com/alexjohnson",
-      github: "https://github.com/alexjohnson",
-      linkedin: "https://linkedin.com/in/alexjohnson",
+      github: "https://github.com/ArshTiwari2004",
+      linkedin: "https://www.linkedin.com/in/arsh-tiwari-072609284/",
     }
   },
   {
@@ -40,28 +40,28 @@ const teamMembers = [
     bio: "AI/ML & Frontend Developer",
     socials: {
       twitter: "https://twitter.com/sarahchen",
-      github: "https://github.com/sarahchen",
-      linkedin: "https://linkedin.com/in/sarahchen",
+      github: "https://github.com/priyanshi0609",
+      linkedin: "https://www.linkedin.com/in/priyanshi-bothra-339568219/",
     }
   },
   {
     name: "Nibedan Pati",
     image: "/nibedan1.jpeg?height=200&width=200",
-    bio: "Full Stack Developer",
+    bio: "AI&Ml & Full Stack Developer",
     socials: {
       twitter: "https://twitter.com/miguelrodriguez",
-      github: "https://github.com/miguelrodriguez",
-      linkedin: "https://linkedin.com/in/miguelrodriguez",
+      github: "https://github.com/Heisenberg300604",
+      linkedin: "https://www.linkedin.com/in/nibedan-pati-2139b3277/",
     }
   },
   {
-    name: "Kanishq Verma",
-    image: "/placeholder.svg?height=200&width=200",
-   // bio: "Expert in logistics and resource allocation during crisis situations.",
+    name: "Kanishk Verma",
+    image: "/kanishk.jpg?height=200&width=200",
+    bio: "Frontend Developer",
     socials: {
       twitter: "https://twitter.com/priyasharma",
       github: "https://github.com/priyasharma",
-      linkedin: "https://linkedin.com/in/priyasharma",
+      linkedin: "https://www.linkedin.com/in/kanishkverma7",
     }
   },
 ]
@@ -443,41 +443,41 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative z-10 py-20">
-        <div className="container mx-auto px-6">
-          <AnimatedSection className="bg-gradient-to-r from-blue-900/50 to-teal-900/50 backdrop-blur-sm rounded-2xl p-10 border border-blue-800/50 hover:border-blue-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 overflow-hidden relative">
-            <div className="absolute inset-0 overflow-hidden">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute rounded-full bg-blue-500/10"
-                  style={{
-                    width: `${Math.random() * 300 + 50}px`,
-                    height: `${Math.random() * 300 + 50}px`,
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                    opacity: Math.random() * 0.5 + 0.1,
-                    animation: `float ${Math.random() * 10 + 10}s infinite ${Math.random() * 5}s ease-in-out`,
-                  }}
-                />
-              ))}
-            </div>
-            <div className="text-center relative z-10">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in">
-                Ready to Transform Crisis Management?
-              </h2>
-              <p className="text-gray-300 max-w-2xl mx-auto mb-8 animate-fade-in-delay">
-                Join Sahyog today and be part of the revolution in disaster response and management.
-              </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30 animate-bounce-in">
-                Go to Dashboard
-              </button>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+        <section className="relative z-10 py-20">
+          <div className="container mx-auto px-6">
+            <AnimatedSection className="bg-gradient-to-r from-blue-900/50 to-teal-900/50 backdrop-blur-sm rounded-2xl p-10 border border-blue-800/50 hover:border-blue-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 overflow-hidden relative">
+          <div className="absolute inset-0 overflow-hidden">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div
+            key={i}
+            className="absolute rounded-full bg-blue-500/10"
+            style={{
+              width: `${Math.random() * 300 + 50}px`,
+              height: `${Math.random() * 300 + 50}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              opacity: Math.random() * 0.5 + 0.1,
+              animation: `float ${Math.random() * 10 + 10}s infinite ${Math.random() * 5}s ease-in-out`,
+            }}
+              />
+            ))}
+          </div>
+          <div className="text-center relative z-10">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in">
+              Ready to Transform Crisis Management?
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-8 animate-fade-in-delay">
+              Join Sahyog today and be part of the revolution in disaster response and management.
+            </p>
+            <a href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-blue-500/30 animate-bounce-in">
+              Go to Dashboard
+            </a>
+          </div>
+            </AnimatedSection>
+          </div>
+        </section>
 
-      {/* Footer */}
+        {/* Footer */}
       <footer className="relative z-10 bg-gray-900 pt-16 pb-8 border-t border-gray-800">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-10 mb-10">
