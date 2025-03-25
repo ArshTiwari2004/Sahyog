@@ -17,14 +17,18 @@
     "expo-camera": "^16.0.18",
     "expo-constants": "^17.0.8",
     "expo-file-system": "^18.0.12",
+    "expo-font": "~13.0.4",
+    "expo-linear-gradient": "^14.0.2",
     "expo-location": "^18.0.8",
+    "expo-splash-screen": "~0.29.22",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-native": "0.76.7",
     "react-native-maps": "^1.20.1",
     "react-native-paper": "^5.13.1",
     "react-native-safe-area-context": "^5.3.0",
-    "react-native-screens": "^4.9.2"
+    "react-native-screens": "^4.9.2",
+    "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

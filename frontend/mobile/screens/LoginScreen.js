@@ -1,124 +1,235 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { TextInput, Button, Text, Surface } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-import Constants from 'expo-constants';
+import { View, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { TextInput, Button, Text, Surface, useTheme } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const API_URL = 'http://localhost:5000/api';
-
-const LoginScreen = ({ navigation }) => {
+const Login = ({ navigation }) => {
+  const theme = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [isSignup, setIsSignup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [secureText, setSecureText] = useState(true);
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError('');
-      
-      // This would be your actual API call
-      // const response = await axios.post(`${API_URL}/users/login`, { email, password });
-      
-      // For demo purposes, we'll simulate a successful login
-      await AsyncStorage.setItem('userToken', 'demo-token');
+  const handleAuth = () => {
+    // Minimal auth logic (will be replaced later)
+    setLoading(true);
+    setTimeout(() => {
       setLoading(false);
       navigation.replace('Dashboard');
-    } catch (err) {
-      setLoading(false);
-      setError(err.response?.data?.message || 'Failed to login. Please try again.');
-    }
+    }, 1500);
+  };
+
+  const handleEmergencyReport = () => {
+    navigation.navigate('ReportIncident', { isEmergency: true });
   };
 
   return (
-    <View style={styles.container}>
-      <Surface style={styles.surface}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Sahyog</Text>
-          <Text style={styles.subtitle}>Disaster Management System</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <LinearGradient
+        colors={['#0A84FF', '#0066CC']}
+        style={styles.background}
+      >
+        {/* Emergency Button */}
+        {/* <TouchableOpacity 
+          style={styles.emergencyButton}
+          onPress={handleEmergencyReport}
+        >
+          <Text style={styles.emergencyText}>🚨 EMERGENCY REPORT</Text>
+        </TouchableOpacity> */}
+
+        <View style={styles.logoContainer}>
+          {/* <Image 
+            source={require('../assets/logo-white.png')} 
+            style={styles.logo}
+          /> */}
+          <Text style={styles.tagline}>Your Lifeline During Disasters</Text>
         </View>
-        
-        <View style={styles.form}>
+
+        <Surface style={styles.card} elevation={4}>
+          <Text variant="titleMedium" style={styles.authTitle}>
+            {isSignup ? 'Create Account' : 'Welcome Back'}
+          </Text>
+
+          {isSignup && (
+            <TextInput
+              label="Full Name"
+              value={name}
+              onChangeText={setName}
+              mode="outlined"
+              left={<TextInput.Icon icon="account" />}
+              style={styles.input}
+              autoCapitalize="words"
+              theme={{ colors: { primary: theme.colors.primary } }}
+            />
+          )}
+
           <TextInput
             label="Email"
             value={email}
             onChangeText={setEmail}
             mode="outlined"
+            left={<TextInput.Icon icon="email" />}
             style={styles.input}
             keyboardType="email-address"
             autoCapitalize="none"
+            theme={{ colors: { primary: theme.colors.primary } }}
           />
-          
+
           <TextInput
             label="Password"
             value={password}
             onChangeText={setPassword}
             mode="outlined"
+            left={<TextInput.Icon icon="lock" />}
+            right={<TextInput.Icon 
+              icon={secureText ? "eye-off" : "eye"} 
+              onPress={() => setSecureText(!secureText)}
+            />}
             style={styles.input}
-            secureTextEntry
+            secureTextEntry={secureText}
+            theme={{ colors: { primary: theme.colors.primary } }}
           />
-          
-          {error ? <Text style={styles.error}>{error}</Text> : null}
-          
+
+          {error ? (
+            <Text style={styles.errorText}>{error}</Text>
+          ) : null}
+
           <Button 
-            mode="contained" 
-            onPress={handleLogin}
-            style={styles.button}
+            mode="contained"
+            onPress={handleAuth}
             loading={loading}
             disabled={loading}
+            style={styles.authButton}
+            labelStyle={styles.buttonLabel}
           >
-            Login
+            {isSignup ? 'Sign Up' : 'Login'}
           </Button>
-        </View>
-      </Surface>
-    </View>
+
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>
+              {isSignup ? 'Already have an account?' : "Don't have an account?"}
+            </Text>
+            <Button 
+              mode="text" 
+              onPress={() => setIsSignup(!isSignup)}
+              labelStyle={styles.toggleButtonLabel}
+            >
+              {isSignup ? 'Login' : 'Sign Up'}
+            </Button>
+          </View>
+
+          <Button 
+            mode="outlined" 
+            onPress={() => navigation.navigate('ReportIncident', { isAnonymous: true })}
+            style={styles.anonymousButton}
+            labelStyle={styles.anonymousButtonLabel}
+          >
+            🚨 EMERGENCY REPORT
+          </Button>
+        </Surface>
+      </LinearGradient>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  background: {
+    flex: 1,
+    padding: 20,
     justifyContent: 'center',
-    padding: 20,
   },
-  surface: {
-    padding: 20,
-    elevation: 4,
-    borderRadius: 10,
+  emergencyButton: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 50 : 30,
+    right: 20,
+    backgroundColor: '#FF3B30',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    elevation: 3,
   },
-  header: {
+  emergencyText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  logoContainer: {
     alignItems: 'center',
     marginBottom: 30,
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1976d2',
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 10,
   },
-  subtitle: {
+  tagline: {
+    color: 'white',
     fontSize: 16,
-    color: '#757575',
+    fontWeight: '500',
   },
-  form: {
-    width: '100%',
+  card: {
+    borderRadius: 16,
+    padding: 24,
+    backgroundColor: 'white',
+  },
+  authTitle: {
+    textAlign: 'center',
+    marginBottom: 24,
+    fontWeight: '600',
+    color: '#333',
   },
   input: {
-    marginBottom: 15,
+    marginBottom: 16,
+    backgroundColor: 'transparent',
   },
-  button: {
-    marginTop: 10,
+  authButton: {
+    marginTop: 8,
+    borderRadius: 8,
+    paddingVertical: 6,
+    backgroundColor: '#0A84FF',
   },
-  error: {
-    color: '#d32f2f',
-    marginBottom: 10,
+  buttonLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  footerText: {
+    color: '#666',
+  },
+  toggleButtonLabel: {
+    color: '#0A84FF',
+    fontWeight: 'bold',
+  },
+  anonymousButton: {
+    marginTop: 20,
+    borderColor: '#FF3B30',
+    borderRadius: 8,
+  },
+  anonymousButtonLabel: {
+    color: '#FF3B30',
+  },
+  errorText: {
+    color: '#FF3B30',
+    textAlign: 'center',
+    marginBottom: 12,
   },
 });
 
-export default LoginScreen;
+export default Login;
