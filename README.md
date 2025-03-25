@@ -232,7 +232,8 @@ curl http://localhost:8000/
 
 
 
-**Performace comparision for the models deployed**
+
+## **Performace comparision for the models deployed**
 
 | Endpoint                | Avg Latency | Throughput (req/s) |
 |--------------------------|-------------|---------------------|
