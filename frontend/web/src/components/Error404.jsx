@@ -9,7 +9,7 @@ const Error404 = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <AlertTriangle size={60} className="text-red-500 mb-4" />
       <h1 className="text-4xl font-bold text-gray-800 mb-2">404 - Page Not Found</h1>
-      <p className="text-lg text-gray-600 text-center mb-6">Sorry! Team CodeCanvas would be working on this page or it may have been moved. Project Sahyog has many features except this. We would update this very soon.</p>
+      <p className="text-lg text-gray-600 text-center mb-6">Sorry! Team CodeCanvas would be working on this page or it may have been moved. We would update this very soon.</p>
       <div className="flex space-x-4">
         <button onClick={() => navigate(-1)} className="flex items-center px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800">
           <ArrowLeftCircle size={20} className="mr-2" /> Go Back
