@@ -157,7 +157,7 @@ This AI service powers the core intelligence layer of the Sahyog disaster manage
 ### Step-by-Step Setup
 
 1. **Configure Environment Variables**
-   ```bash
+```bash
    # Required Variables
    export GCP_PROJECT_ID="your-project-id"
    export GCP_REGION="us-central1"
@@ -167,7 +167,7 @@ This AI service powers the core intelligence layer of the Sahyog disaster manage
    # Optional Overrides
    export DAMAGE_MODEL_ENDPOINT="projects/.../locations/.../endpoints/..."
    export RESOURCE_MODEL_ENDPOINT="projects/.../locations/.../endpoints/..."
-   ```
+```
 2.  **Build Docker Image**
 
 ```bash
