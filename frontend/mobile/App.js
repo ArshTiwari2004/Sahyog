@@ -8,6 +8,7 @@ import { StatusBar } from 'expo-status-bar';
 import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import IncidentReportScreen from './screens/IncidentReportScreen';
+import SplashScreen from './screens/SplashScreen';
 //import ResourceTrackingScreen from './screens/ResourceTrackingScreen';
 //import AlertsScreen from './screens/AlertsScreen';
 
@@ -17,7 +18,12 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen 
+            name="Splash" 
+            component={SplashScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen 
             name="Login" 
             component={LoginScreen}
