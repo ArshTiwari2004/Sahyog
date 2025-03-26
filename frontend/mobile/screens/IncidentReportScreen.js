@@ -1,35 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { TextInput, Button, Chip, Card, Text, Snackbar } from 'react-native-paper';
+import { 
+  View, 
+  StyleSheet, 
+  Dimensions, 
+  TouchableOpacity, 
+  ScrollView, 
+  Image,
+  Platform 
+} from 'react-native';
+import { 
+  Text, 
+  TextInput, 
+  Button, 
+  Chip 
+} from 'react-native-paper';
 import * as Location from 'expo-location';
-import { Camera } from 'expo-camera';
-import * as FileSystem from 'expo-file-system';
-import axios from 'axios';
+import * as ImagePicker from 'expo-image-picker';
 import MapView, { Marker } from 'react-native-maps';
+import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const API_URL = 'http://localhost:5000/api';
+const { width, height } = Dimensions.get('window');
 
 const IncidentReportScreen = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [severity, setSeverity] = useState('Medium');
   const [location, setLocation] = useState(null);
-  const [image, setImage] = useState(null);
-  const [hasPermission, setHasPermission] = useState(null);
-  const [cameraVisible, setCameraVisible] = useState(false);
+  const [mediaFiles, setMediaFiles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
 
+  // Location and Permission Setup
   useEffect(() => {
     (async () => {
-      // Request camera permissions
-      const { status: cameraStatus } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(cameraStatus === 'granted');
-      
-      // Request location permissions
-      const { status: locationStatus } = await Location.requestForegroundPermissionsAsync();
-      if (locationStatus === 'granted') {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === 'granted') {
         const location = await Location.getCurrentPositionAsync({});
         setLocation({
           latitude: location.coords.latitude,
@@ -41,279 +46,316 @@ const IncidentReportScreen = ({ navigation }) => {
     })();
   }, []);
 
-  const handleSeverityChange = (value) => {
-    setSeverity(value);
+  // Media Capture Handler
+  const handleMediaCapture = async (type) => {
+    let result;
+    if (type === 'photo') {
+      result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 0.7,
+      });
+    } else if (type === 'video') {
+      result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+        allowsEditing: true,
+        quality: 0.7,
+      });
+    }
+
+    if (!result.canceled) {
+      setMediaFiles(prev => [...prev, {
+        uri: result.assets[0].uri,
+        type: result.assets[0].type
+      }]);
+    }
   };
 
-  const handleTakePhoto = async () => {
-    setCameraVisible(true);
-  };
-
-  const handleCameraClose = () => {
-    setCameraVisible(false);
-  };
-
+  // Submit Incident Report
   const handleSubmit = async () => {
-    if (!title || !description || !location) {
-      setSnackbarMessage('Please fill in all required fields');
-      setSnackbarVisible(true);
+    if (!title || !description) {
+      alert('Please fill in all required fields');
       return;
     }
 
     try {
       setLoading(true);
+      // Simulated submission
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // For demo, we're just simulating an API request
-      // In a real app, you would upload the image and send the data to your API
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setSnackbarMessage('Incident reported successfully!');
-      setSnackbarVisible(true);
-      setLoading(false);
-      
-      // Reset form
-      setTitle('');
-      setDescription('');
-      setSeverity('Medium');
-      setImage(null);
-      
-      // Go back to dashboard after delay
-      setTimeout(() => {
-        navigation.navigate('Dashboard');
-      }, 1500);
-      
+      // Reset form or navigate
+      navigation.navigate('Dashboard');
     } catch (error) {
-      console.error('Error submitting incident report:', error);
-      setSnackbarMessage('Failed to submit report. Please try again.');
-      setSnackbarVisible(true);
+      alert('Submission failed');
+    } finally {
       setLoading(false);
     }
   };
 
-  if (cameraVisible) {
-    return (
-      <View style={styles.cameraContainer}>
-        <Camera
-          style={styles.camera}
-          type={Camera.Constants.Type.back}
-          ratio="16:9"
-        >
-          <View style={styles.cameraControls}>
-            <Button 
-              mode="contained" 
-              onPress={handleCameraClose}
-              style={styles.cameraButton}
-            >
-              Cancel
-            </Button>
-            <Button 
-              mode="contained" 
-              onPress={() => {
-                // Here you would actually take a photo
-                // For demo purposes, we're just closing the camera
-                setImage('dummy-image-path');
-                setCameraVisible(false);
-              }}
-              style={styles.cameraButton}
-            >
-              Take Photo
-            </Button>
-          </View>
-        </Camera>
-      </View>
-    );
-  }
+  // Remove Media File
+  const removeMediaFile = (index) => {
+    setMediaFiles(prev => prev.filter((_, i) => i !== index));
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Title title="Report an Incident" />
-        <Card.Content>
-          <TextInput
-            label="Incident Title"
-            value={title}
-            onChangeText={setTitle}
-            mode="outlined"
-            style={styles.input}
+
+      <ScrollView 
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Screen Title */}
+        <View style={styles.headerContainer}>
+          <Ionicons 
+            name="warning-outline" 
+            size={24} 
+            color="#0A84FF" 
+            style={styles.headerIcon}
           />
-          
-          <TextInput
-            label="Description"
-            value={description}
-            onChangeText={setDescription}
-            mode="outlined"
-            multiline
-            numberOfLines={4}
-            style={styles.input}
-          />
-          
-          <Text style={styles.label}>Severity Level:</Text>
-          <View style={styles.chips}>
+          <Text style={styles.headerTitle}>Report Incident</Text>
+        </View>
+
+        {/* Incident Title Input */}
+        <TextInput
+          label="Incident Title"
+          value={title}
+          onChangeText={setTitle}
+          mode="outlined"
+          style={styles.input}
+          theme={{ 
+            colors: { 
+              primary: '#0A84FF',
+              background: 'white' 
+            } 
+          }}
+        />
+
+        {/* Description Input */}
+        <TextInput
+          label="Describe the Incident"
+          value={description}
+          onChangeText={setDescription}
+          mode="outlined"
+          multiline
+          numberOfLines={4}
+          style={styles.input}
+          theme={{ 
+            colors: { 
+              primary: '#0A84FF',
+              background: 'white' 
+            } 
+          }}
+        />
+
+        {/* Severity Selection */}
+        <View style={styles.severityContainer}>
+          <Text style={styles.sectionTitle}>Severity Level</Text>
+          <View style={styles.chipContainer}>
             {['Low', 'Medium', 'High'].map((level) => (
               <Chip
                 key={level}
                 selected={severity === level}
-                onPress={() => handleSeverityChange(level)}
+                onPress={() => setSeverity(level)}
                 style={[
-                  styles.chip,
-                  severity === level && 
-                  (level === 'Low' ? styles.lowSeverity : 
-                   level === 'Medium' ? styles.mediumSeverity : 
-                   styles.highSeverity)
+                  styles.severityChip,
+                  severity === level && styles[`${level.toLowerCase()}Severity`]
                 ]}
+                textStyle={styles.chipText}
               >
                 {level}
               </Chip>
             ))}
           </View>
-          
-          {location ? (
-            <View style={styles.mapContainer}>
-              <MapView
-                style={styles.map}
-                region={location}
-              >
-                <Marker coordinate={{
+        </View>
+
+        {/* Media Capture */}
+        <View style={styles.mediaCaptureContainer}>
+          <Text style={styles.sectionTitle}>Add Media</Text>
+          <View style={styles.mediaButtonContainer}>
+            <TouchableOpacity 
+              style={styles.mediaButton}
+              onPress={() => handleMediaCapture('photo')}
+            >
+              <Ionicons name="camera" size={24} color="#0A84FF" />
+              <Text style={styles.mediaButtonText}>Photo</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.mediaButton}
+              onPress={() => handleMediaCapture('video')}
+            >
+              <Ionicons name="videocam" size={24} color="#0A84FF" />
+              <Text style={styles.mediaButtonText}>Video</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Media Preview */}
+          <ScrollView 
+            horizontal 
+            style={styles.mediaPreviewContainer}
+            showsHorizontalScrollIndicator={false}
+          >
+            {mediaFiles.map((media, index) => (
+              <View key={index} style={styles.mediaPreviewItem}>
+                <Image 
+                  source={{ uri: media.uri }} 
+                  style={styles.mediaPreview}
+                />
+                <TouchableOpacity 
+                  style={styles.removeMediaButton}
+                  onPress={() => removeMediaFile(index)}
+                >
+                  <Ionicons name="close" size={16} color="white" />
+                </TouchableOpacity>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Location */}
+        {location && (
+          <View style={styles.locationContainer}>
+            <Text style={styles.sectionTitle}>Location</Text>
+            <MapView
+              style={styles.map}
+              region={location}
+            >
+              <Marker 
+                coordinate={{
                   latitude: location.latitude,
                   longitude: location.longitude
-                }} />
-              </MapView>
-              <Text style={styles.locationText}>
-                Coordinates: {location.latitude.toFixed(4)}, {location.longitude.toFixed(4)}
-              </Text>
-            </View>
-          ) : (
-            <Button 
-              mode="outlined" 
-              onPress={async () => {
-                const location = await Location.getCurrentPositionAsync({});
-                setLocation({
-                  latitude: location.coords.latitude,
-                  longitude: location.coords.longitude,
-                  latitudeDelta: 0.0922,
-                  longitudeDelta: 0.0421,
-                });
-              }}
-              style={styles.locationButton}
-            >
-              Get Current Location
-            </Button>
-          )}
-          
-          <Button 
-            mode="outlined" 
-            icon="camera"
-            onPress={handleTakePhoto}
-            style={styles.button}
-          >
-            {image ? 'Change Photo' : 'Take Photo'}
-          </Button>
-          
-          {image && (
-            <Text style={styles.photoText}>Photo captured successfully</Text>
-          )}
-          
-          <Button 
-            mode="contained" 
-            onPress={handleSubmit}
-            style={styles.submitButton}
-            loading={loading}
-            disabled={loading}
-          >
-            Submit Report
-          </Button>
-        </Card.Content>
-      </Card>
-      
-      <Snackbar
-        visible={snackbarVisible}
-        onDismiss={() => setSnackbarVisible(false)}
-        duration={3000}
-      >
-        {snackbarMessage}
-      </Snackbar>
-    </ScrollView>
+                }} 
+              />
+            </MapView>
+            <Text style={styles.locationText}>
+              {location.latitude.toFixed(4)}, {location.longitude.toFixed(4)}
+            </Text>
+          </View>
+        )}
+
+        {/* Submit Button */}
+        <Button 
+          mode="contained" 
+          onPress={handleSubmit}
+          style={styles.submitButton}
+          loading={loading}
+          disabled={loading}
+        >
+          Submit Incident Report
+        </Button>
+      </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'white',
   },
-  card: {
-    margin: 16,
+  scrollContainer: {
+    paddingHorizontal: 20,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  headerIcon: {
+    marginRight: 10,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#0A84FF',
   },
   input: {
-    marginBottom: 16,
+    marginBottom: 20,
   },
-  label: {
-    marginBottom: 8,
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
   },
-  chips: {
-    flexDirection: 'row',
-    marginBottom: 16,
+  severityContainer: {
+    marginBottom: 20,
   },
-  chip: {
-    marginRight: 8,
-  },
-  lowSeverity: {
-    backgroundColor: '#81c784',
-  },
-  mediumSeverity: {
-    backgroundColor: '#ffb74d',
-  },
-  highSeverity: {
-    backgroundColor: '#e57373',
-  },
-  mapContainer: {
-    height: 200,
-    marginBottom: 16,
-    borderRadius: 4,
-    overflow: 'hidden',
-  },
-  map: {
-    flex: 1,
-  },
-  locationText: {
-    fontSize: 12,
-    color: '#757575',
-    marginTop: 4,
-  },
-  locationButton: {
-    marginBottom: 16,
-  },
-  button: {
-    marginBottom: 16,
-  },
-  photoText: {
-    marginBottom: 16,
-    color: '#4caf50',
-  },
-  submitButton: {
-    marginTop: 8,
-  },
-  cameraContainer: {
-    flex: 1,
-  },
-  camera: {
-    flex: 1,
-  },
-  cameraControls: {
-    flex: 1,
-    backgroundColor: 'transparent',
+  chipContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 20,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
   },
-  cameraButton: {
-    flex: 0.4,
+  severityChip: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  chipText: {
+    fontWeight: '600',
+  },
+  lowSeverity: {
+    backgroundColor: '#E6F3E6',
+  },
+  mediumSeverity: {
+    backgroundColor: '#FFF3E0',
+  },
+  highSeverity: {
+    backgroundColor: '#FFEBEE',
+  },
+  mediaCaptureContainer: {
+    marginBottom: 20,
+  },
+  mediaButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  mediaButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0F4F8',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    width: '48%',
+  },
+  mediaButtonText: {
+    marginLeft: 10,
+    color: '#0A84FF',
+    fontWeight: '600',
+  },
+  mediaPreviewContainer: {
+    marginTop: 10,
+  },
+  mediaPreviewItem: {
+    position: 'relative',
+    marginRight: 10,
+  },
+  mediaPreview: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  removeMediaButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: 15,
+    padding: 2,
+  },
+  locationContainer: {
+    marginBottom: 20,
+  },
+  map: {
+    height: 200,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  locationText: {
+    marginTop: 10,
+    textAlign: 'center',
+    color: '#666',
+  },
+  submitButton: {
+    marginTop: 20,
+    marginBottom: 40,
+    backgroundColor: '#0A84FF',
   },
 });
 
