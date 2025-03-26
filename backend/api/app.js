@@ -1,11 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const dotenv = require('dotenv');
-const { connectDB } = require('./utils/db');
+import express, { json, urlencoded } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import { config } from 'dotenv';
+import { connectDB } from './utils/db';
 
 // Load environment variables
-dotenv.config(); 
+config(); 
 
 // Initialize Express app
 const app = express();
@@ -13,8 +13,8 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/incidents', require('./routes/incidents'));
@@ -32,4 +32,4 @@ app.use((err, req, res, next) => {
 // Database connection
 connectDB();
 
-module.exports = app;
+export default app;

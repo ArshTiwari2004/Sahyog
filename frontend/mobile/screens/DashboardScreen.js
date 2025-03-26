@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Card, Title, Paragraph, Button, ActivityIndicator, Text } from 'react-native-paper';
 import MapView, { Marker } from 'react-native-maps';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+
 
 const API_URL = 'http://localhost:5000/api';
 
@@ -22,9 +21,6 @@ const DashboardScreen = ({ navigation }) => {
     const fetchDashboardData = async () => {
       // In a real app, you would fetch this data from your API
       try {
-        // const incidentsResponse = await axios.get(`${API_URL}/incidents`);
-        // const alertsResponse = await axios.get(`${API_URL}/alerts`);
-        
         // Mock data for demo
         const mockIncidents = [
           { id: 1, type: 'Flood', location: 'Mumbai', severity: 'High', lat: 19.0760, lng: 72.8777 },
@@ -47,10 +43,6 @@ const DashboardScreen = ({ navigation }) => {
 
     fetchDashboardData();
   }, []);
-
-  const navigateToScreen = (screen) => {
-    navigation.navigate(screen);
-  };
 
   if (loading) {
     return (
@@ -81,35 +73,6 @@ const DashboardScreen = ({ navigation }) => {
         </Card.Content>
         <Card.Title title="Active Incidents" />
       </Card>
-
-      <View style={styles.actionsContainer}>
-        <Button 
-          mode="contained" 
-          style={styles.actionButton} 
-          icon="alert"
-          onPress={() => navigateToScreen('ReportIncident')}
-        >
-          Report Incident
-        </Button>
-        
-        <Button 
-          mode="contained" 
-          style={styles.actionButton}
-          icon="package"
-          onPress={() => navigateToScreen('ResourceTracking')}
-        >
-          Track Resources
-        </Button>
-        
-        <Button 
-          mode="contained" 
-          style={styles.actionButton}
-          icon="bell"
-          onPress={() => navigateToScreen('Alerts')}
-        >
-          View Alerts
-        </Button>
-      </View>
 
       <Card style={styles.card}>
         <Card.Title title="Recent Alerts" />
@@ -152,15 +115,6 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
-  },
-  actionsContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginHorizontal: 16,
-    marginVertical: 8,
-  },
-  actionButton: {
-    marginVertical: 8,
   },
   card: {
     margin: 16,
