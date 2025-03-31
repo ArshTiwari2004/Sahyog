@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Card, Title, Paragraph, Button, ActivityIndicator, Text } from 'react-native-paper';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-web-maps';
 
 
 const API_URL = 'http://localhost:5000/api';

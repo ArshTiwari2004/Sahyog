@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Share, Alert } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-web-maps';
 
 const AlertScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('critical');
