@@ -45,13 +45,14 @@ const Sidebar = ({
         count: 5, // Mock incident count
         roles: ['admin', 'operator', 'viewer']
       },
-      { 
-        name: 'Disaster Map', 
-        icon: Map, 
-        route: '/map', 
-        key: 'map',
-        roles: ['admin', 'operator']
-      }
+      // this will be used for the map and we will build this in the future
+      // { 
+      //   name: 'Disaster Map', 
+      //   icon: Map, 
+      //   route: '/map', 
+      //   key: 'map',
+      //   roles: ['admin', 'operator']
+      // }
     ],
     management: [
       { 
@@ -68,14 +69,16 @@ const Sidebar = ({
         key: 'response-teams',
         roles: ['admin']
       },
-      { 
-        name: 'Alerts', 
-        icon: Bell, 
-        route: '/alerts', 
-        key: 'alerts',
-        count: unreadAlerts,
-        roles: ['admin', 'operator']
-      }
+      // Uncomment this when we have the alerts feature ready
+      // this will be used for the alerts and we will build this in the future
+      // { 
+      //   name: 'Alerts', 
+      //   icon: Bell, 
+      //   route: '/alerts', 
+      //   key: 'alerts',
+      //   count: unreadAlerts,
+      //   roles: ['admin', 'operator']
+      // }
     ],
     analytics: [
       { 

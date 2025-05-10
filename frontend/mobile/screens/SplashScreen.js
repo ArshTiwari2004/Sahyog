@@ -15,6 +15,7 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sahyog</Text>
+      <Text style={styles.subtitle}>Your Lifeline During Disasters</Text>
     </View>
   );
 };
@@ -24,12 +25,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#007bff', // You can change this to your preferred color
+    backgroundColor: 'white',
   },
   title: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 52,
+    fontWeight: '900', // Ultra-bold
+    color: '#2c3e50', // Deep blue-gray for an attractive, modern look
+    letterSpacing: -1.5, // Tighten letter spacing for a more compact feel
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    fontWeight: '300',
+    color: '#7f8c8d', // Soft gray for subtlety
+    textAlign: 'center',
+    paddingHorizontal: 40,
   }
 });
 

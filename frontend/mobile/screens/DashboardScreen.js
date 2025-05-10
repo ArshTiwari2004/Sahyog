@@ -3,9 +3,6 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Card, Title, Paragraph, Button, ActivityIndicator, Text } from 'react-native-paper';
 import MapView, { Marker } from 'react-native-web-maps';
 
-
-const API_URL = 'http://localhost:5000/api';
-
 const DashboardScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [incidents, setIncidents] = useState([]);
